@@ -1,15 +1,15 @@
-package org.example.productservice.Models;
+package org.example.productservice.DTOs;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Product {
+public class FakeStoreProductDto {
     private Long id;
     private String title;
     private double price;
+    private String category;
     private String description;
     private String image;
-    private Category category;
 }
