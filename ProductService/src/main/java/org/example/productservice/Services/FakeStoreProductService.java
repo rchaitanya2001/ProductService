@@ -2,9 +2,7 @@ package org.example.productservice.Services;
 
 import org.example.productservice.DTOs.FakeStoreProductDto;
 import org.example.productservice.Exceptions.InvalidProductIdException;
-import org.example.productservice.Models.Category;
 import org.example.productservice.Models.Product;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpMessageConverterExtractor;
@@ -64,14 +62,11 @@ public class FakeStoreProductService implements ProductService{
     }
 
     @Override
-    public Product updateProduct() {
+    public Product updateProduct(Long id, Product product) {
+
         return null;
     }
 
-    @Override
-    public Product replaceProduct() {
-        return null;
-    }
 
     @Override
     public Product replaceProduct(Long id, Product product) {

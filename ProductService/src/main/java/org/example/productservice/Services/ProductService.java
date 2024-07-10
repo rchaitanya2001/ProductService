@@ -12,8 +12,7 @@ import java.util.List;
 public interface ProductService {
     Product getProductById(Long id) throws InvalidProductIdException;
     List<Product>getAllProducts();
-    Product updateProduct();
-    Product replaceProduct();
+    Product updateProduct(Long id,Product product);
 
     Product replaceProduct(Long id, Product product);
 

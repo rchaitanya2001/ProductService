@@ -3,6 +3,7 @@ package org.example.productservice.Repositories;
 import org.example.productservice.Models.Category;
 import org.example.productservice.Models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,6 +21,8 @@ public interface ProductRepository extends JpaRepository <Product,Long> {//<wch 
     void deleteById(Long id);
     void deleteByTitle(String title);
     Product save(Product product);
+//    @Query("CustomQuery")//HQL-->Hibernate Query Language
+//    Optional<Product> someRandomQuery();
 }
 /*Product Repository-->Product
 Product findById(id) ==>select *from product where id = <id>

@@ -16,12 +16,12 @@ import java.util.Optional;
 @Service("selfProductService")
 
 
-public class SelfProductService implements ProductService{
-@Autowired
-    private CategoryRepository categoryRepository ;
+public class SelfProductService implements ProductService {
+    @Autowired
+    private CategoryRepository categoryRepository;
     private ProductRepository productRepository;
-    SelfProductService(ProductRepository productRepository)
-    {
+
+    SelfProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
@@ -29,8 +29,7 @@ public class SelfProductService implements ProductService{
     public Product getProductById(Long id) throws InvalidProductIdException {
         //fetch product with the given id from DB
         Optional<Product> optionalProduct = productRepository.findById(id);
-        if(optionalProduct.isEmpty())
-        {
+        if (optionalProduct.isEmpty()) {
             //throw an exception-->ProductNotFound
             return null;
         }
@@ -46,34 +45,52 @@ public class SelfProductService implements ProductService{
     }
 
     @Override
-    public Product updateProduct() {
-        return null;
-    }
-
-    @Override
-    public Product replaceProduct() {
-        return null;
-    }
-
-    @Override
-    public Product replaceProduct(Long id, Product product) {
-        return null;
-    }
-
-    @Override
-    public Product createProduct(Product product) {
-        Category category =product.getCategory();
-        if(category.getId() == null)
-        {
-            Category savedCategory = categoryRepository.save(category);
-            product.setCategory(savedCategory);
+    public Product updateProduct(Long id, Product product) {
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        if (optionalProduct.isEmpty()) {
+            throw new RuntimeException();
+        }
+        Product currentProduct = optionalProduct.get();
+        if (product == null) {
+            throw new RuntimeException("Invalid Exception");
+        }
+        if (product.getTitle() != null) {
+            //if title is not null,thatr means, we want to update the title
+            currentProduct.setTitle(product.getTitle());
+        }
+        if (product.getDescription() != null) {
+            currentProduct.setDescription(product.getDescription());
+        }
+        if (product.getPrice() != null) {
+            currentProduct.setPrice(product.getPrice());
         }
 
-        return productRepository.save(product);
+
+        return productRepository.save(currentProduct);
     }
 
-    @Override
-    public void deleteproduct() {
+
+        @Override
+        public Product replaceProduct (Long id, Product product){
+            return null;
+        }
+
+        @Override
+        public Product createProduct (Product product){
+            Category category = product.getCategory();
+            if (category.getId() == null) {
+                Category savedCategory = categoryRepository.save(category);
+                product.setCategory(savedCategory);
+            }
+
+            return productRepository.save(product);
+        }
+
+        @Override
+        public void deleteproduct () {
+
+        }
+
 
     }
-}
+
