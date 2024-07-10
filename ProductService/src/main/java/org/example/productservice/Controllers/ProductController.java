@@ -4,6 +4,7 @@ import org.example.productservice.Exceptions.InvalidProductIdException;
 import org.example.productservice.Exceptions.ProductControllerSpecificException;
 import org.example.productservice.Models.Product;
 import org.example.productservice.Services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +15,7 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
     private ProductService productService ;
-    ProductController(ProductService productService)
+    ProductController(@Qualifier("selfProductService") ProductService productService)
     {
         this.productService =productService;
     }
@@ -39,14 +40,13 @@ public class ProductController {
     @GetMapping
     public List<Product> getAllProducts()
     {
-
         return productService.getAllProducts();
     }
 
     @PostMapping
     public Product createProduct(@RequestBody Product product)
     {
-        return new Product();
+        return productService.createProduct(product);
     }
     //partial update
     @PatchMapping("/{id}")
