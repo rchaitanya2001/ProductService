@@ -23,6 +23,7 @@ public interface ProductRepository extends JpaRepository <Product,Long> {//<wch 
     Product save(Product product);
 //    @Query("CustomQuery")//HQL-->Hibernate Query Language
 //    Optional<Product> someRandomQuery();
+    // git check
 }
 /*Product Repository-->Product
 Product findById(id) ==>select *from product where id = <id>
