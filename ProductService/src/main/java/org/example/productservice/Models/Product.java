@@ -14,7 +14,7 @@ public class Product extends BaseModel{
     private Double price;
     private String description;
     private String image;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Category category;//if one product belongs to many categories, we could've taken List<Categories>
 }
 // 1----- 1

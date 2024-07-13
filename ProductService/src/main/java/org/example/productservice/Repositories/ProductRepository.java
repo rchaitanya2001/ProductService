@@ -4,6 +4,7 @@ import org.example.productservice.Models.Category;
 import org.example.productservice.Models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,7 +24,13 @@ public interface ProductRepository extends JpaRepository <Product,Long> {//<wch 
     Product save(Product product);
 //    @Query("CustomQuery")//HQL-->Hibernate Query Language
 //    Optional<Product> someRandomQuery();
-    // git check
+    @Query("select p from Product p where p.price > 120000 and lower(p.title) like '%pro%'")
+    List<ProductWithIdAndTitle> someRandomQuery();
+
+    @Query("select  p.id as id, p.title as title from  Product p where p.id = :id")
+    ProductWithIdAndTitle doSomething(@Param("id")Long id);
+    @Query(value = "select * from product p where p.id = 2",nativeQuery = true)
+    Product doSomethingSql();
 }
 /*Product Repository-->Product
 Product findById(id) ==>select *from product where id = <id>
